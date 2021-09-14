@@ -11,3 +11,9 @@ web-build/
 
 # macOS
 .DS_Store
+
+/backend/images
+/backend/data.json
+/backend/users.json
+yarn.lock
+package-lock.json

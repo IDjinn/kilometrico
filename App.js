@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Text } from 'react-native';
+import Login from './views/login';
+import Logs from './views/logs';
+import Travel from './views/travel';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [login, setLogin] = React.useState(false);
+  const [showLogs, setShowLogs] = React.useState(false);
+  const [motorista, setMotorista] = React.useState('');
+  const [token, setToken] = React.useState('');
+  const [logs, setLogs] = React.useState([]);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return (
+    login ? showLogs ? (<Logs carro={'sandero'} logs={logs} />) : (
+      <Travel
+        setLogs={setLogs}
+        goToLogs={() => setShowLogs(true)}
+        motorista={motorista}
+        token={token}
+      />)
+      : (<Login
+        setToken={setToken}
+        onLogin={(motorista) => {
+          setMotorista(motorista)
+          setLogin(true)
+        }} />)
+  )
+}
